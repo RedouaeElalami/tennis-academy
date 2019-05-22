@@ -13,6 +13,12 @@ public class StepDef extends SpringIntegrationTest {
 
     }
 
+    @When("^the client calls /players/(\\d+)$")
+    public void theClientCallsPLayers(int playerId) throws Throwable {
+        executeGet("http://localhost:8080/players/"+playerId);
+
+    }
+
     @Then("^the client receives status code of (\\d+)$")
     public void the_client_receives_status_code_of(int statueCode) throws Throwable {
 

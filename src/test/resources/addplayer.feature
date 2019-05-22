@@ -1,7 +1,8 @@
-Feature: check the result of the first player Novack djokovic
-  Scenario: client makes call to get /players/1
-    When call /players/1
-    Then  the client receives name of this player is "Novak Djokovic" and his age is 31
+Feature: add a new player
+  Scenario: client makes call to post
+    Given the size of players is 5
+     When add a new player
+    Then  size of players is 6
 
 
 

@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentCaptor.forClass;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 //@WebMvcTest(value = PlayerController.class)
@@ -62,13 +61,8 @@ public class PlayerControllerMockServerTest {
 
         // THEN
         ArgumentCaptor<Player> playerArgumentCaptor = forClass(Player.class);
-        System.out.println("take "+ playerArgumentCaptor.getAllValues());
-//        System.out.println(" +>>>> "+ playerArgumentCaptor.getValue());
-      //  verify(playerJpaRepositoryMock).save(playerArgumentCaptor.capture());
-        //verify(playerJpaRepositoryMock).save(playerArgumentCaptor.capture());
-  //      Player savedPlayer = playerArgumentCaptor.capture();
-
-        assertThat(player.getName()).isEqualTo("titi");
+         Player savedPlayer = playerArgumentCaptor.getValue();
+        assertThat(savedPlayer.getName()).isEqualTo("titi");
 
     }
 

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.tuple;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TennisAcademyApplication.class
-                , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+        , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PlayerControllerTest {
 
     @LocalServerPort

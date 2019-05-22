@@ -4,6 +4,7 @@ import com.zenika.academy.tennisacademy.TennisAcademyApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +20,9 @@ import java.util.Map;
 @ContextConfiguration
 public class SpringIntegrationTest {
     static ResponseResults latestResponse = null;
+
+    @LocalServerPort
+    protected int port;
 
     @Autowired
     protected RestTemplate restTemplate;
