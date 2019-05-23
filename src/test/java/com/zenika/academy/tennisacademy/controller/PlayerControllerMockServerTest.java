@@ -18,6 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentCaptor.forClass;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 //@WebMvcTest(value = PlayerController.class)
@@ -61,9 +65,22 @@ public class PlayerControllerMockServerTest {
 
         // THEN
         ArgumentCaptor<Player> playerArgumentCaptor = forClass(Player.class);
-         Player savedPlayer = playerArgumentCaptor.getValue();
-        assertThat(savedPlayer.getName()).isEqualTo("titi");
+        assertThat(playerArgumentCaptor.getValue().getName()).isEqualTo("titi");
 
+    }
+
+    @Test
+    public void should_add_a_player_Zekrom() throws Exception {
+
+        // GIVEN
+        Player player = new Player();
+        player.setName("titi");
+        player.setAge(28);
+
+        byte[] playerAsJson = objectMapper.writeValueAsBytes(player);
+
+
+        mockMvc.perform(post("/ajouterJoueur").contentType(MediaType.APPLICATION_JSON).content(playerAsJson)).andExpect(redirectedUrl("/players"));
     }
 
 }
