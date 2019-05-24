@@ -2,6 +2,7 @@ package cucumber_SpringBoot;
 
 import com.zenika.academy.tennisacademy.TennisAcademyApplication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -18,6 +19,7 @@ import java.util.Map;
 //@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = TennisAcademyApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
+@AutoConfigureMockMvc
 public class SpringIntegrationTest {
     static ResponseResults latestResponse = null;
 

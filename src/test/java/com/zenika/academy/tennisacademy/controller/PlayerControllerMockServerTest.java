@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentCaptor.forClass;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +34,8 @@ public class PlayerControllerMockServerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private PlayerJpaRepository playerJpaRepositoryMock;
+    @Autowired
+    private PlayerJpaRepository playerJpaRepository;
 
     //@MockBean
     //private EntityManager em;
@@ -80,7 +82,21 @@ public class PlayerControllerMockServerTest {
         byte[] playerAsJson = objectMapper.writeValueAsBytes(player);
 
 
-        mockMvc.perform(post("/ajouterJoueur").contentType(MediaType.APPLICATION_JSON).content(playerAsJson)).andExpect(redirectedUrl("/players"));
+        mockMvc.perform(post("/ajouterJoueur").param("name", "titi").param("age", "28")).andExpect(redirectedUrl("/players")).andDo(print());
+        List<Player> mockAll = playerJpaRepository.findAll();
+        assertThat(mockAll).hasSize(6);
+        assertThat(mockAll.get(5).getName()).isEqualTo("titi");
+    }
+
+    @Test
+    public void should_get_all_players() throws Exception {
+
+        //GIVEN..?
+
+        //WHEN & THEN
+        mockMvc.perform(get("/players"))
+                .andExpect(content().string("[{\"id\":1,\"name\":\"Novak Djokovic\",\"age\":31},{\"id\":2,\"name\":\"Rafael Nadal\",\"age\":32},{\"id\":3,\"name\":\"Roger Federer\",\"age\":32},{\"id\":4,\"name\":\"Alexander Zverev\",\"age\":21},{\"id\":5,\"name\":\"Juan Martin del Potro\",\"age\":30}]"));
+
     }
 
 }

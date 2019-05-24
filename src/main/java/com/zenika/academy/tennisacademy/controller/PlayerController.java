@@ -43,7 +43,7 @@ public class PlayerController {
 
 
     @PostMapping("/ajouterJoueur")
-    public RedirectView createPlayer(@RequestBody Player player) {
+    public RedirectView createPlayer(Player player) {
         playerService.save(player);
         return new RedirectView("/players");
     }
